@@ -1,0 +1,24 @@
+version: '3'
+services:
+  publisher:
+    image: java:8-jdk-alpine
+    volumes:
+      - ./target:/code
+    entrypoint:
+      java -jar /code/vertx-event-stream-publisher.jar
+  web-subscriber:
+    image: java:8-jdk-alpine
+    volumes:
+      - ./target:/code
+    ports:
+      - "8080:8080"
+    entrypoint:
+      java -jar /code/vertx-event-stream-web-subscriber.jar
+  socket-subscriber:
+    image: java:8-jdk-alpine
+    volumes:
+      - ./target:/code
+    ports:
+      - "1234:1234"
+    entrypoint:
+      java -jar /code/vertx-event-stream-socket-subscriber.jar
